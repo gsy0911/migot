@@ -1,11 +1,15 @@
 module.exports = {
 	root: true,
 	env: {
+		browser: true,
 		es6: true,
 		node: true,
 	},
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
+		ecmaFeatures: {
+			jsx: true
+		},
 		sourceType: 'module',
 		ecmaVersion: 2020,
 		tsconfigRootDir: __dirname,
@@ -21,6 +25,7 @@ module.exports = {
 		'prettier',
 		'prettier/@typescript-eslint'
 	],
-		rules: {
+	rules: {
+		complexity: ['error', 10]
 	},
   };
