@@ -6,7 +6,7 @@
 		".eslintrc.js"
 	],
 	"exclude": [
-		"**.js",
+		"webpack.config.js",
 		"node_modules",
 		"dist"
 	]
