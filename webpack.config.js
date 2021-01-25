@@ -25,11 +25,28 @@ module.exports = {
       {
         // 正規表現で指定する
         // 拡張子 .ts または .tsx の場合
-        test: /\.tsx?$/,
-        // ローダーの指定
+		test: /\.tsx?$/,
+		exclude: /node_modules/,
+		// ローダーの指定
+		use: 'ts-loader'
         // TypeScript をコンパイルする
-        use: 'ts-loader',
-      },
+	  },
+	  {
+		test: /\.css$/,
+		use: [
+			'style-loader',
+			{
+				loader: 'css-loader',
+				options: {
+					url: false,
+					sourceMap: true,
+					importLoaders: 2
+				}
+			},
+		]
+		// to import css
+		// loader: ['style-loader', 'css-loader'],
+	  }
     ],
   },
   // 処理対象のファイルを記載する
