@@ -1,5 +1,7 @@
-import { IUser } from "./IUser";
+// import { IUser } from "./IUser";
+import { ITaskList } from "./ITask";
 
 export interface IState {
-	user: IUser;
+	// user: IUser;
+	taskList: ITaskList;
 }
