@@ -24,6 +24,15 @@ const Task = styled.div<{ expiration: boolean }>`
 
 const TaskCheckBox = styled.div`
 	align-items: center;
+	background-color: #fff;
+	border: 2px solid #ccc;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	flex-grow: 0;
+	flex-shrink: 0;
+	height: 2em;
+	width: 2em;
 `;
 
 const TaskCheck = styled.p`
@@ -33,10 +42,16 @@ const TaskCheck = styled.p`
 
 const TaskBody = styled.div`
 	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	flex-shrink: 0;
+	height: 3em;
+	justify-content: space-around;
 `;
 
 const TaskRemove = styled.div`
 	flex-grow: 0;
+	flex-shrink: 0;
 `;
 
 const TaskName = styled.div`
@@ -55,7 +70,7 @@ export const TaskRow: React.FC<{ data:ITask }> = (props) => {
 	}, [data.deadline, data.completed]);
 
 	const deadlineString = useMemo(() => {
-		return data.deadline
+		return data.deadline.toString()
 	}, [data.deadline])
 
 	const onRowCLick = useCallback(() => {
