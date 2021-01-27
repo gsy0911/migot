@@ -1,38 +1,86 @@
 import { Dispatch } from "redux";
+import "../core/ICore";
 import { actionCreatorFactory } from "typescript-fsa";
 import { ITask } from "../states";
 
 const actionCreator = actionCreatorFactory("task-actions");
 
-export const showTaskListAction = actionCreator<ITask[]>("show-task-list");
+/**
+ * create actions below
+ * - starting: type => null
+ * - done: type => ITask[]
+ * - failure =>  string as message
+ */
+export const showTaskListAction = actionCreator.async<null, ITask[], string>(
+	"show-task-list"
+);
 
-export const addTaskAction = actionCreator<ITask>("add");
+export const getTaskList = async (dispatch: Dispatch): Promise<void> => {
+	dispatch(showTaskListAction.started(null));
+	const taskList = await window.core.loadTaskList().catch((e) => {
+		console.error(e);
+		dispatch(
+			showTaskListAction.failed({
+				error: "failed to load file",
+				params: null,
+			})
+		);
+	});
+	if (!taskList) return;
+	dispatch(showTaskListAction.done({ result: taskList, params: null }));
+};
 
-export const toggleCompleteAction = actionCreator<string>("toggle-complete");
+export const addTask = async (
+	task: ITask,
+	dispatch: Dispatch
+): Promise<void> => {
+	dispatch(showTaskListAction.started(null));
+	const taskList = await window.core.saveTask(task).catch((e) => {
+		console.error(e);
+		dispatch(
+			showTaskListAction.failed({
+				error: "failed to write file.",
+				params: null,
+			})
+		);
+	});
+	if (!taskList) return;
+	dispatch(showTaskListAction.done({ result: taskList, params: null }));
+};
 
-export const deleteTaskAction = actionCreator<string>("delete");
+export const toggleTask = async (
+	task: ITask,
+	dispatch: Dispatch
+): Promise<void> => {
+	dispatch(showTaskListAction.started(null));
+	task.completed = !task.completed;
+	const taskList = await window.core.saveTask(task).catch((e) => {
+		console.error(e);
+		dispatch(
+			showTaskListAction.failed({
+				error: "failed to write file.",
+				params: null,
+			})
+		);
+	});
+	if (!taskList) return;
+	dispatch(showTaskListAction.done({ result: taskList, params: null }));
+};
 
-const dummyTasks: ITask[] = [
-	{
-		completed: false,
-		deadline: new Date(),
-		id: "0",
-		title: "task0",
-	},
-	{
-		completed: false,
-		deadline: new Date(),
-		id: "1",
-		title: "task1",
-	},
-	{
-		completed: false,
-		deadline: new Date(),
-		id: "2",
-		title: "task2",
-	},
-];
-
-export const getTaskList = (dispatch: Dispatch): void => {
-	dispatch(showTaskListAction(dummyTasks));
+export const deleteTask = async (
+	taskId: string,
+	dispatch: Dispatch
+): Promise<void> => {
+	dispatch(showTaskListAction.started(null));
+	const taskList = await window.core.deleteTask(taskId).catch((e) => {
+		console.error(e);
+		dispatch(
+			showTaskListAction.failed({
+				error: "failed to write file.",
+				params: null,
+			})
+		);
+	});
+	if (!taskList) return;
+	dispatch(showTaskListAction.done({ result: taskList, params: null }));
 };

@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useCallback,  useState} from 'react';
 import { useDispatch } from 'react-redux';
 import { styled } from '../FoundationStyle';
-import { addTaskAction } from '../actions';
+import { addTask } from '../actions';
 import { nanoid } from "nanoid";
 
 
@@ -60,15 +60,17 @@ export const AddTask: React.FC = () => {
 	}, [])
 
 	const onClickAddButton = useCallback(() => {
-		dispatch(
-			addTaskAction({
+
+		void addTask(
+			{
 				completed: false,
 				deadline,
 				title,
 				id: nanoid()
-			})
-		)
-	}, []);
+			},
+			dispatch,
+		);
+	}, [deadline, title]);
 	return (
 		<Container>
 			<TaskNameBox>

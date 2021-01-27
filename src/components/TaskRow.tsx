@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteTaskAction, toggleCompleteAction } from '../actions';
+import { deleteTask, toggleTask } from '../actions';
 import { ITask } from '../states';
 import { styled } from '../FoundationStyle';
 
@@ -61,7 +61,7 @@ const TaskName = styled.div`
 const Deadline = styled.div``;
 
 
-export const TaskRow: React.FC<{ data:ITask }> = (props) => {
+export const TaskRow: React.FC<{ data: ITask }> = (props) => {
 	const { data } = props;
 	const dispatch = useDispatch();
 
@@ -74,12 +74,12 @@ export const TaskRow: React.FC<{ data:ITask }> = (props) => {
 	}, [data.deadline])
 
 	const onRowCLick = useCallback(() => {
-		dispatch(toggleCompleteAction(data.id))
-	}, [data.id])
+		void toggleTask(data, dispatch);
+	}, [data])
 
 	const onDeleteClick = useCallback(
 		(e: MouseEvent<HTMLDivElement>) => {
-			dispatch(deleteTaskAction(data.id));
+			void deleteTask(data.id, dispatch);
 			e.stopPropagation();
 		},
 		[data.id]
