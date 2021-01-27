@@ -9,6 +9,8 @@ import {
 
 const initState: ITaskList = {
 	tasks: [],
+	loading: false,
+	failedMessage: "",
 };
 
 export const taskReducer = reducerWithInitialState<ITaskList>(initState)
