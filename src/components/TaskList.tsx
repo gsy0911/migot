@@ -9,13 +9,28 @@ import { getTaskList } from '../actions';
 import { SlowBuffer } from 'buffer';
 
 
-const MainContainer = styled.div``;
+const MainContainer = styled.div`
+	margin: 10px auto 0 auto;
+	max-width: 600px;
+	min-width: 300px;
+	width: 80%;
+`;
 
 
-const Header = styled.h1``;
+const Header = styled.h1`
+	background-color: ${(p): string => p.theme.PRIMARY_3};
+	color: ${(p): string => p.theme.FOREGROUND_REVERSE};
+	font-size: 160%;
+	padding: 1em;
+	text-align: center;
+`;
 
 
-const TaskList = styled.div``;
+const TaskList = styled.div`
+	display: flex;
+	flex-direction: column;
+	margin-top: 1em;
+`;
 
 
 const createTaskList = (tasks: ITask[]): JSX.Element[] => {

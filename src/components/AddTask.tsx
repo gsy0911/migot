@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useCallback,  useState} from 'react';
 import { useDispatch } from 'react-redux';
-// import styled from 'styled-components';
 import { styled } from '../FoundationStyle';
 import { addTaskAction } from '../actions';
+import { nanoid } from "nanoid";
 
 
 const Container = styled.div`
@@ -65,7 +65,7 @@ export const AddTask: React.FC = () => {
 				completed: false,
 				deadline,
 				title,
-				id: ''
+				id: nanoid()
 			})
 		)
 	}, []);
