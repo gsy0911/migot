@@ -45,7 +45,7 @@ const loadTaskList = async (): Promise<ITask[]> => {
 		reviver: __private__.reviver,
 	})) as { data: ITask[] };
 
-	await setTimeoutPromise(500);
+	await setTimeoutPromise(100);
 	return jsonData.data;
 };
 
@@ -61,7 +61,7 @@ const saveTaskList = async (taskList: ITask[]): Promise<void> => {
 };
 
 const saveTask = async (task: ITask): Promise<ITask[]> => {
-	await setTimeoutPromise(500);
+	await setTimeoutPromise(100);
 	const taskList = await loadTaskList();
 	const existTask = taskList.find((pTask) => pTask.id === task.id);
 	if (!task.id || !existTask) {
@@ -77,7 +77,7 @@ const saveTask = async (task: ITask): Promise<ITask[]> => {
 };
 
 const deleteTask = async (id: string): Promise<ITask[]> => {
-	await setTimeoutPromise(500);
+	await setTimeoutPromise(100);
 	const taskList = await loadTaskList();
 	const deleteTaskList = taskList.filter((task) => task.id !== id);
 	await saveTaskList(deleteTaskList);
