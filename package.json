@@ -70,6 +70,8 @@
     "*.{js,ts,json}": "prettier --write"
   },
   "dependencies": {
+    "fs-extra": "^9.1.0",
+    "nanoid": "^3.1.20",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-redux": "^7.2.2",

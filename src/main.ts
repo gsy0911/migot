@@ -1,5 +1,6 @@
 import { app, BrowserWindow, globalShortcut } from "electron";
 import { TrayMenu } from "./TrayMenu";
+import path from "path";
 
 let tray = null;
 
@@ -8,9 +9,11 @@ const createWindow = () => {
 		width: 1200,
 		height: 600,
 		webPreferences: {
+			// not to use `Node.js` in `renderer process`
 			nodeIntegration: false,
 			nodeIntegrationInWorker: false,
 			contextIsolation: true,
+			preload: path.join(__dirname, "./core/preLoad.js"),
 		},
 	});
 
