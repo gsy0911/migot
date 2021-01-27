@@ -14,12 +14,14 @@ const createWindow = () => {
 			nodeIntegrationInWorker: false,
 			contextIsolation: true,
 			preload: path.join(__dirname, "./core/preLoad.js"),
+			webSecurity: false,
 		},
 	});
 
-	void win.loadFile("./index.html");
-
-	win.webContents.openDevTools();
+	void win.loadFile(path.join(__dirname, "./index.html"));
+	if (process.argv.find((arg) => arg === "--debug")) {
+		win.webContents.openDevTools();
+	}
 };
 
 void app.whenReady().then(createWindow);

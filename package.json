@@ -2,7 +2,7 @@
   "name": "migot",
   "version": "0.1.0",
   "description": "productivity",
-  "main": "dist/index.js",
+  "main": "dist/main.js",
   "scripts": {
     "dev": "ts-node src/index.ts",
     "dev:watch": "ts-node-dev --respawn src/index.ts",
@@ -10,13 +10,15 @@
     "tsc": "tsc",
     "webpack": "webpack",
     "build": "npm-run-all clean lint:fix tsc webpack",
-    "start": "electron ./dist/main.js",
+    "start": "electron ./dist/main.js --debug",
     "check-types": "tsc --noEmit",
     "eslint": "eslint src/**/*.ts",
     "eslint:fix": "eslint src/**/*.ts --fix",
     "format": "prettier --write 'src/**/*.{js,ts,json}'",
     "lint": "npm-run-all eslint check-types",
-    "lint:fix": "npm-run-all eslint:fix check-types format"
+	"lint:fix": "npm-run-all eslint:fix check-types format",
+	"as:mac": "electron-builder --mac --x64",
+	"package:mac": "npm-run-all build as:mac"
   },
   "repository": {
     "type": "git",
@@ -68,6 +70,38 @@
     "*.{js,ts}": "eslint --cache --fix",
     "*.ts": "tsc --noEmit",
     "*.{js,ts,json}": "prettier --write"
+  },
+  "build": {
+	"extends": null,
+	"productName": "migot",
+	"appId": "migot.mdrskn.com",
+	"directories": {
+		"output": "./products"
+	},
+	"files": [
+		"dist/**/*"
+	],
+	"dmg": {
+		"contents": [
+			{
+				"x": 410,
+				"y": 150,
+				"type": "link",
+				"path": "/Applications"
+			},
+			{
+				"x": 130,
+				"y": 150,
+				"type": "file"
+			}
+		]
+	},
+	"mac": {
+		"icon": "./src/icon/mac_icon.icns",
+		"target": [
+			"dmg"
+		]
+	}
   },
   "dependencies": {
     "fs-extra": "^9.1.0",
