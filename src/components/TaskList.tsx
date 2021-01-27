@@ -53,7 +53,7 @@ export const TaskListContainer: React.FC = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		getTaskList(dispatch);
+		void getTaskList(dispatch);
 	}, [])
 
 	const taskList = useSelector<IState, ITaskList>(a => a.taskList);
