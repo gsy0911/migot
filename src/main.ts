@@ -1,4 +1,4 @@
-import { app, BrowserWindow, globalShortcut } from "electron";
+import { app, BrowserWindow, globalShortcut, Notification } from "electron";
 import { TrayMenu } from "./TrayMenu";
 import path from "path";
 
@@ -45,6 +45,12 @@ app.on("ready", function () {
 		// window shown or not
 		window ? hideWindow(window) : showWindow();
 	});
+
+	const notification = new Notification({
+		title: "migot",
+		body: "Hello !",
+	});
+	notification.show();
 
 	tray = new TrayMenu();
 });
