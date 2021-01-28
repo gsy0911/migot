@@ -1,4 +1,5 @@
 import { app, Tray, Menu, nativeImage } from "electron";
+import path from "path";
 
 export class TrayMenu {
 	// Create a variable to store our tray
@@ -7,7 +8,7 @@ export class TrayMenu {
 	public readonly tray: Tray;
 
 	// Path where should we fetch our icon;
-	private iconPath = "/assets/icon.png";
+	private iconPath = path.join(__dirname + "/assets/icon.png");
 
 	constructor() {
 		this.tray = new Tray(this.createNativeImage());
@@ -17,8 +18,7 @@ export class TrayMenu {
 	createNativeImage(): nativeImage {
 		// Since we never know where the app is installed,
 		// we need to add the app base path to it.
-		// const path = `${__dirname}${this.iconPath}`;
-		const path = `${app.getAppPath()}${this.iconPath}`;
+		const path = this.iconPath;
 		const image = nativeImage.createFromPath(path);
 		// Marks the image as a template image.
 		image.setTemplateImage(true);
