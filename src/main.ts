@@ -55,6 +55,11 @@ app.on("ready", function () {
 	tray = new TrayMenu();
 });
 
+app.on("will-quit", () => {
+	// remove all registered shortcut
+	globalShortcut.unregisterAll();
+});
+
 function showWindow() {
 	// detect blur event of BrowserWindow
 	app.focus({ steal: true });
