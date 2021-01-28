@@ -16,6 +16,8 @@ const createWindow = () => {
 			preload: path.join(__dirname, "./core/preLoad.js"),
 			webSecurity: false,
 		},
+		frame: false,
+		alwaysOnTop: true,
 	});
 
 	void win.loadFile(path.join(__dirname, "./index.html"));
