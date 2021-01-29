@@ -16,6 +16,8 @@ const createWindow = () => {
 			preload: path.join(__dirname, "./core/preLoad.js"),
 			webSecurity: false,
 		},
+		frame: false,
+		alwaysOnTop: true,
 	});
 
 	void win.loadFile(path.join(__dirname, "./index.html"));
@@ -53,6 +55,11 @@ app.on("ready", function () {
 	notification.show();
 
 	tray = new TrayMenu();
+});
+
+app.on("will-quit", () => {
+	// remove all registered shortcut
+	globalShortcut.unregisterAll();
 });
 
 function showWindow() {
