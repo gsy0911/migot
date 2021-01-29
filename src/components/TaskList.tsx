@@ -7,6 +7,7 @@ import { styled } from '../FoundationStyle';
 import { TaskRow } from './TaskRow';
 import { getTaskList } from '../actions';
 import { Loading } from './Loading';
+import { Link } from 'react-router-dom';
 
 
 const MainContainer = styled.div`
@@ -71,6 +72,7 @@ export const TaskListContainer: React.FC = () => {
 	return (
 		<div>
 			<Header>TODO</Header>
+			<Link to={"/main"}>main</Link>
 			<MainContainer>
 				<AddTask />
 				<TaskList>{taskListElement}</TaskList>
