@@ -5,6 +5,7 @@ import { HashRouter, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, theme } from './FoundationStyle';
 import { store } from './store';
+import { HeaderAppBar } from './components';
 import { TaskListContainer } from './components/TaskList';
 
 const container = document.getElementById('contents');
@@ -14,8 +15,9 @@ ReactDOM.render(
 		<ThemeProvider theme={theme}>
 			<GlobalStyle />
 			<HashRouter>
+				<HeaderAppBar/>
 				<div>
-					<Route path="/" exact component={TaskListContainer} />
+					<Route path="/task" exact component={TaskListContainer} />
 				</div>
 			</HashRouter>
 		</ThemeProvider>
