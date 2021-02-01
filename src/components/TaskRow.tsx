@@ -4,8 +4,9 @@ import { deleteTask, toggleTask } from '../actions';
 import { ITask } from '../states';
 import { styled } from '../FoundationStyle';
 
-import { Button, Card, CardActions, CardContent, Grid, Typography } from '@material-ui/core';
+import { IconButton, Card, Checkbox, CardHeader, CardContent, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 const useStyles = makeStyles( (theme) => ({
 	card: {
@@ -24,13 +25,45 @@ export const MaterialTaskRow: React.FC<{ data: ITask}> = (props) => {
 	const { data } = props;
 	const dispatch = useDispatch();
 
+	const expiration = useMemo(() => {
+		return new Date() < data.deadline || data.completed;
+	}, [data.deadline, data.completed]);
+
+	const deadlineString = useMemo(() => {
+		return data.deadline.toString()
+	}, [data.deadline])
+
+	const onRowCLick = useCallback(() => {
+		void toggleTask(data, dispatch);
+	}, [data])
+
+	const onDeleteClick = useCallback(() => {
+		void deleteTask(data.id, dispatch);
+	},
+	[data.id]
+	);
 	return (
-		<Grid item xs={12} sm={6} md={4}>
+		<Grid item>
 			<Card className={classes.card}>
 				<CardContent className={classes.cardContent}>
-					<Typography variant="h5" component="h2">
-						{data.title}
-					</Typography>
+					<CardHeader
+						avatar={
+							<Checkbox
+							checked={data.completed}
+							onClick={onRowCLick}
+							name="isCompleted"
+							color="primary"
+							/>
+						}
+						action={
+							<IconButton aria-label="delete" onClick={onDeleteClick}>
+								<DeleteForeverIcon />
+
+							</IconButton>
+						}
+						title={data.title}
+						subheader={deadlineString}
+						/>
 				</CardContent>
 			</Card>
 		</Grid>
