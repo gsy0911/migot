@@ -4,6 +4,39 @@ import { deleteTask, toggleTask } from '../actions';
 import { ITask } from '../states';
 import { styled } from '../FoundationStyle';
 
+import { Button, Card, CardActions, CardContent, Grid, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles( (theme) => ({
+	card: {
+		height: "100%",
+		display: "flex",
+		flexDirection: "column"
+	},
+	cardContent: {
+		flexGrow: 1,
+	}
+}))
+
+export const MaterialTaskRow: React.FC<{ data: ITask}> = (props) => {
+	const classes = useStyles()
+
+	const { data } = props;
+	const dispatch = useDispatch();
+
+	return (
+		<Grid item xs={12} sm={6} md={4}>
+			<Card className={classes.card}>
+				<CardContent className={classes.cardContent}>
+					<Typography variant="h5" component="h2">
+						{data.title}
+					</Typography>
+				</CardContent>
+			</Card>
+		</Grid>
+	)
+}
+
 const Task = styled.div<{ expiration: boolean }>`
 	align-items: center;
 	background-color: ${(p): string => p.expiration ? 'inherit' : p.theme.SECONDARY_2_0};

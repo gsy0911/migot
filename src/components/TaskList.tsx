@@ -4,7 +4,7 @@ import { IState } from '../states/IState';
 import { ITask, ITaskList } from '../states/ITask';
 import { AddTask } from './AddTask';
 import { styled } from '../FoundationStyle';
-import { TaskRow } from './TaskRow';
+import { TaskRow, MaterialTaskRow } from './TaskRow';
 import { getTaskList } from '../actions';
 import { Loading } from './Loading';
 
@@ -45,7 +45,7 @@ const createTaskList = (tasks: ITask[]): JSX.Element[] => {
 	)
 	.map(it => {
 		console.log(it)
-		return <TaskRow key={it.id} data={it} />
+		return <MaterialTaskRow key={it.id} data={it} />
 	});
 }
 
