@@ -19,7 +19,7 @@ const useStyles = makeStyles( (theme) => ({
 	}
 }))
 
-export const MaterialTaskRow: React.FC<{ data: ITask}> = (props) => {
+export const MaterialTaskRow: React.FC<{ data: ITask }> = (props) => {
 	const classes = useStyles()
 
 	const { data } = props;
@@ -31,17 +31,15 @@ export const MaterialTaskRow: React.FC<{ data: ITask}> = (props) => {
 
 	const deadlineString = useMemo(() => {
 		return data.deadline.toString()
-	}, [data.deadline])
+	}, [data.deadline]);
 
 	const onRowCLick = useCallback(() => {
 		void toggleTask(data, dispatch);
-	}, [data])
+	}, [data]);
 
 	const onDeleteClick = useCallback(() => {
 		void deleteTask(data.id, dispatch);
-	},
-	[data.id]
-	);
+	}, [data.id]);
 	return (
 		<Grid item>
 			<Card className={classes.card}>
