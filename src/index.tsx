@@ -5,7 +5,7 @@ import { HashRouter, Route } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, theme } from './FoundationStyle';
 import { store } from './store';
-import { HeaderAppBar } from './components';
+import { HeaderAppBar, StickyFooter } from './components';
 import { TaskListContainer } from './components/TaskList';
 
 const container = document.getElementById('contents');
@@ -19,6 +19,7 @@ ReactDOM.render(
 				<div>
 					<Route path="/task" exact component={TaskListContainer} />
 				</div>
+				<StickyFooter />
 			</HashRouter>
 		</ThemeProvider>
 	</Provider>,
