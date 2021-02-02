@@ -4,6 +4,70 @@ import { styled } from '../FoundationStyle';
 import { addTask } from '../actions';
 import { nanoid } from "nanoid";
 
+import { IconButton, TextField } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import AddIcon from '@material-ui/icons/Add';
+
+
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		display: 'flex',
+		'& .MuiTextField-root': {
+			margin: theme.spacing(1),
+			width: '25ch',
+		},
+	},
+  	}));
+
+export const MaterialAddTask: React.FC = () => {
+	const classes = useStyles()
+
+	const dispatch = useDispatch();
+
+	const [deadline, setDeadline] = useState<Date>(
+		new Date()
+	);
+
+	const [title, setTitle] = useState<string>('');
+	const onChangeTaskName = useCallback(
+		(e: ChangeEvent<HTMLInputElement>) => {
+			setTitle(e.currentTarget.value);
+	}, []);
+
+	const onChangeDeadline = useCallback(
+		(e: ChangeEvent<HTMLInputElement>) => {
+			console.log(e.currentTarget.value)
+			setDeadline(new Date())
+	}, [])
+
+	const onClickAddButton = useCallback(() => {
+
+		void addTask(
+			{
+				completed: false,
+				deadline,
+				title,
+				id: nanoid()
+			},
+			dispatch,
+		);
+	}, [deadline, title]);
+	return (
+		<div>
+			<form className={classes.root} noValidate autoComplete="off">
+				<TextField id="standard-required" type="search" label="Task Title" onChange={onChangeTaskName} />
+				<TextField id="standard-required" type="search" label="Date" onChange={onChangeDeadline} />
+
+			</form>
+			<IconButton aria-label="delete" onClick={onClickAddButton}>
+				<AddIcon />
+			</IconButton>
+
+		</div>
+	)
+}
+
 
 const Container = styled.div`
 	align-items: center;

@@ -2,7 +2,7 @@ import React, { useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { IState } from '../states/IState';
 import { ITask, ITaskList } from '../states/ITask';
-import { AddTask } from './AddTask';
+import { AddTask, MaterialAddTask } from './AddTask';
 import { styled } from '../FoundationStyle';
 import { TaskRow, MaterialTaskRow } from './TaskRow';
 import { getTaskList } from '../actions';
@@ -72,7 +72,7 @@ export const TaskListContainer: React.FC = () => {
 		<div>
 			<Header>TODO</Header>
 			<MainContainer>
-				<AddTask />
+				<MaterialAddTask />
 				<TaskList>{taskListElement}</TaskList>
 			</MainContainer>
 			<Loading shown={taskList.loading} />
