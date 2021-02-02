@@ -7,7 +7,12 @@ import { nanoid } from "nanoid";
 import { IconButton, TextField } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import AddIcon from '@material-ui/icons/Add';
-
+import {
+	MuiPickersUtilsProvider,
+	KeyboardDatePicker
+} from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
+import { MaterialUiPickersDate } from '@material-ui/pickers/typings/date';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -25,9 +30,7 @@ export const MaterialAddTask: React.FC = () => {
 
 	const dispatch = useDispatch();
 
-	const [deadline, setDeadline] = useState<Date>(
-		new Date()
-	);
+	const [deadline, setDeadline] = useState<Date>(new Date());
 
 	const [title, setTitle] = useState<string>('');
 	const onChangeTaskName = useCallback(
@@ -35,10 +38,10 @@ export const MaterialAddTask: React.FC = () => {
 			setTitle(e.currentTarget.value);
 	}, []);
 
-	const onChangeDeadline = useCallback(
-		(e: ChangeEvent<HTMLInputElement>) => {
-			console.log(e.currentTarget.value)
-			setDeadline(new Date())
+	const onChangeDeadline = useCallback((date: MaterialUiPickersDate) => {
+		if (date) {
+			setDeadline(date)
+		}
 	}, [])
 
 	const onClickAddButton = useCallback(() => {
@@ -53,13 +56,26 @@ export const MaterialAddTask: React.FC = () => {
 			dispatch,
 		);
 	}, [deadline, title]);
+	// type error occurred DateFnsUtils
 	return (
-		<div>
-			<form className={classes.root} noValidate autoComplete="off">
-				<TextField id="standard-required" type="search" label="Task Title" onChange={onChangeTaskName} />
-				<TextField id="standard-required" type="search" label="Date" onChange={onChangeDeadline} />
-
-			</form>
+		<div className={classes.root}>
+			<TextField
+				id="standard-required"
+				type="search"
+				label="Task Title"
+				variant="outlined"
+				margin="dense"
+				onChange={onChangeTaskName} />
+			<MuiPickersUtilsProvider utils={DateFnsUtils}>
+				<KeyboardDatePicker
+					disableToolbar
+					inputVariant="outlined"
+					variant="inline"
+					value={deadline}
+					onChange={onChangeDeadline}
+					label="deadline"
+					format="yyyy/MM/dd" />
+			</MuiPickersUtilsProvider>
 			<IconButton aria-label="delete" onClick={onClickAddButton}>
 				<AddIcon />
 			</IconButton>
