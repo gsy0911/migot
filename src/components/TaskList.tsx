@@ -70,7 +70,6 @@ export const TaskListContainer: React.FC = () => {
 
 	return (
 		<div>
-			<Header>TODO</Header>
 			<MainContainer>
 				<MaterialAddTask />
 				<TaskList>{taskListElement}</TaskList>

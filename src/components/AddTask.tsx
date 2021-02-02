@@ -64,7 +64,6 @@ export const MaterialAddTask: React.FC = () => {
 				type="search"
 				label="Task Title"
 				variant="outlined"
-				margin="dense"
 				onChange={onChangeTaskName} />
 			<MuiPickersUtilsProvider utils={DateFnsUtils}>
 				<KeyboardDatePicker
