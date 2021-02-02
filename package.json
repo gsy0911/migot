@@ -104,6 +104,7 @@
  "dependencies": {
   "@material-ui/core": "^4.11.3",
   "@material-ui/icons": "^4.11.2",
+  "@material-ui/pickers": "^3.2.10",
   "@types/react-router-dom": "^5.1.7",
   "fs-extra": "^9.1.0",
   "nanoid": "^3.1.20",
