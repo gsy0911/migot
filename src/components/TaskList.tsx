@@ -59,11 +59,12 @@ export const TaskListContainer: React.FC = () => {
 
 	return (
 		<div className={classes.root}>
+			<Loading shown={taskList.loading} />
 			<Container fixed className={classes.container}>
 				<MaterialAddTask />
 				{taskListElement}
 			</Container>
-			<Loading shown={taskList.loading} />
+
 		</div>
 	)
 }
