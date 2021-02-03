@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { HashRouter, Route } from 'react-router-dom';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from "@material-ui/styles";
 import { store } from './store';
 import { HeaderAppBar, StickyFooter } from './components';
 import { TaskListContainer } from './components/TaskList';
@@ -13,8 +13,8 @@ const theme = createMuiTheme({
 	palette: {
 	  text: {
 		//   default: "#000000",
-		  primary: "#FFFFFF",
-		  secondary: "#FFFFFF"
+		  primary: "#000000",
+		  secondary: "#000000"
 	  },
 	  primary: {
 		// light: will be calculated from palette.primary.main,
@@ -27,6 +27,9 @@ const theme = createMuiTheme({
 		main: '#708070',
 		// dark: will be calculated from palette.secondary.main,
 		// contrastText: '#ffa500',
+	  },
+	  background: {
+		default: "#c0c0c0"
 	  },
 	  // Used by `getContrastText()` to maximize the contrast between
 	  // the background and the text.
@@ -41,10 +44,9 @@ const theme = createMuiTheme({
 const container = document.getElementById('contents');
 
 ReactDOM.render(
-	<div className="main">
+	<div>
 		<Provider store={store}>
 			<ThemeProvider theme={theme}>
-				{/* <GlobalStyle /> */}
 				<HashRouter>
 					<HeaderAppBar/>
 					<div>
