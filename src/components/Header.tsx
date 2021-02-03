@@ -22,9 +22,10 @@ const useStyles = makeStyles( (theme) => ({
 export const HeaderAppBar: React.FC = () => {
 	const classes = useStyles();
 
+	// officially recommened place second `<Toolbar />`, to avoid hide other components by fixed-AppBar
 	return (
 		<div className={classes.root}>
-			<AppBar position="static">
+			<AppBar position="fixed">
 				<Toolbar>
 					<Typography variant="h6" className={classes.title}>
 						migot
@@ -33,6 +34,7 @@ export const HeaderAppBar: React.FC = () => {
 					<Link to={"/task"} style={{ color: '#FFF', padding: 8}}>TASK</Link>
 				</Toolbar>
 			</AppBar>
+			<Toolbar />
 		</div>
 	);
 }
