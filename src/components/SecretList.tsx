@@ -2,6 +2,8 @@ import React, { ChangeEvent, useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core';
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
+import { ISecretsResponse, ISecretData } from '../states';
+import { SecretCard } from './secretsComponent/SecretCard';
 
 const useStyles = makeStyles( (theme) => ({
 	root: {
@@ -18,21 +20,18 @@ const useStyles = makeStyles( (theme) => ({
 const region = 'ap-northeast-1';
 const client = new SecretsManagerClient({ region: region });
 
+const dummySecret: ISecretData[] = [
+	{name: "hello1", primaryId: "fea1", passphrase: "fff1"},
+	{name: "hello2", primaryId: "fea2", passphrase: "fff2"},
+	{name: "hello3", primaryId: "fea3", passphrase: "fff3"},
+]
 
-interface SecretsResponse {
-	status: "invalid" | "valid"
-	data?: SecretsData[]
+const createSecretCard = (data: ISecretData[]): JSX.Element[] => {
+	return data.map((item, i) => {
+		return <SecretCard key={i} name={item.name} primaryId={item.primaryId} passphrase={item.passphrase} />
+	})
 }
 
-interface SecretsData {
-	name: string
-	values: Value[]
-}
-
-interface Value {
-	key: string
-	value: string
-}
 
 export const SecretListContainer: React.FC = () => {
 	const classes = useStyles();
@@ -42,7 +41,7 @@ export const SecretListContainer: React.FC = () => {
 		setSecretsName(e.currentTarget.value);
 	}, [])
 
-	const [secrets, setSecrets] = useState<SecretsResponse>({"status": "invalid", "data": []});
+	const [secrets, setSecrets] = useState<ISecretsResponse>({"status": "invalid", "data": dummySecret});
 
 	const onClickSecretsNameButton = useCallback(() => {
 		const command = new GetSecretValueCommand({
@@ -73,6 +72,7 @@ export const SecretListContainer: React.FC = () => {
 			<Button aria-label="find secrets" onClick={onClickSecretsNameButton}>
 				button
 			</Button>
+			{createSecretCard(secrets.data || [])}
 		</div>
 	)
 }
