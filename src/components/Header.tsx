@@ -32,6 +32,7 @@ export const HeaderAppBar: React.FC = () => {
 					</Typography>
 
 					<Link to={"/task"} style={{ color: '#FFF', padding: 8}}>TASK</Link>
+					<Link to={"/secrets"} style={{ color: '#FFF', padding: 8}}>SECRETS</Link>
 				</Toolbar>
 			</AppBar>
 			<Toolbar />

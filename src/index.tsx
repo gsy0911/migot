@@ -4,7 +4,11 @@ import { Provider } from 'react-redux';
 import { HashRouter, Route } from 'react-router-dom';
 import { ThemeProvider } from "@material-ui/styles";
 import { store } from './store';
-import { HeaderAppBar, StickyFooter } from './components';
+import {
+	HeaderAppBar,
+	StickyFooter,
+	SecretListContainer
+} from './components';
 import { TaskListContainer } from './components/TaskList';
 import { createMuiTheme } from '@material-ui/core/styles';
 
@@ -51,6 +55,9 @@ ReactDOM.render(
 					<HeaderAppBar/>
 					<div>
 						<Route path="/task" exact component={TaskListContainer} />
+					</div>
+					<div>
+						<Route path="/secrets" exact component={SecretListContainer} />
 					</div>
 					<StickyFooter />
 				</HashRouter>
