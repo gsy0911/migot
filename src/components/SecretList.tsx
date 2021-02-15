@@ -22,7 +22,7 @@ const useStyles = makeStyles( (theme) => ({
 }))
 
 const region = 'ap-northeast-1';
-const client = new SecretsManagerClient({ region: region });
+const client = new SecretsManagerClient({ region: region, credentials: window.core.credentialProvider() });
 
 const dummySecret: ISecretData[] = [
 	{name: "hello1", primaryId: "fea1", passphrase: "fff1"},
