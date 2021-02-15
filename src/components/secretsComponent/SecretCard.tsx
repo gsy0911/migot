@@ -9,9 +9,6 @@ const useStyles = makeStyles( (theme) => ({
 	root: {
 		minWidth: 275,
 	},
-	title: {
-
-	},
 	card: {
 		height: "100%",
 		display: "flex",

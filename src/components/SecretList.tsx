@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, Button } from '@material-ui/core';
+import { TextField, Button, Container, Grid } from '@material-ui/core';
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
 import { ISecretsResponse, ISecretData } from '../states';
 import { SecretCard } from './secretsComponent/SecretCard';
@@ -14,7 +14,11 @@ const useStyles = makeStyles( (theme) => ({
 		maxWidth: "600px",
 		minWidth: "300px",
 		width: "80%"
-	}
+	},
+	cardGrid: {
+		paddingTop: theme.spacing(8),
+		paddingBottom: theme.spacing(8),
+	},
 }))
 
 const region = 'ap-northeast-1';
@@ -72,7 +76,11 @@ export const SecretListContainer: React.FC = () => {
 			<Button aria-label="find secrets" onClick={onClickSecretsNameButton}>
 				button
 			</Button>
-			{createSecretCard(secrets.data || [])}
+			<Container className={classes.cardGrid} maxWidth="md">
+				<Grid container spacing={4}>
+					{createSecretCard(secrets.data || [])}
+				</Grid>
+			</Container>
 		</div>
 	)
 }
