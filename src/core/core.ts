@@ -4,6 +4,8 @@ import path from "path";
 import { nanoid } from "nanoid";
 import { ITask } from "../states/ITask";
 import ICore from "./ICore";
+import { defaultProvider } from "@aws-sdk/credential-provider-node";
+import { CredentialProvider } from "@aws-sdk/types";
 
 // save profile data in each OS user
 const dataFilePath = path.join(os.homedir(), "todo.json");
@@ -84,8 +86,13 @@ const deleteTask = async (id: string): Promise<ITask[]> => {
 	return deleteTaskList;
 };
 
+const credentialProvider = (): CredentialProvider => {
+	return defaultProvider();
+};
+
 export const core: ICore = {
 	loadTaskList,
 	saveTask,
 	deleteTask,
+	credentialProvider,
 };
