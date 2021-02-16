@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback,  useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../actions';
+import { addTask } from '../../actions';
 import { nanoid } from "nanoid";
 
 import { IconButton, TextField } from '@material-ui/core';
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 	},
   	}));
 
-export const MaterialAddTask: React.FC = () => {
+export const TaskHeader: React.FC = () => {
 	const classes = useStyles()
 
 	const dispatch = useDispatch();

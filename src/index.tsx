@@ -7,9 +7,9 @@ import { store } from './store';
 import {
 	HeaderAppBar,
 	StickyFooter,
-	SecretListContainer
+	SecretPage,
+	TaskPage
 } from './components';
-import { TaskListContainer } from './components/TaskList';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 
@@ -54,10 +54,10 @@ ReactDOM.render(
 				<HashRouter>
 					<HeaderAppBar/>
 					<div>
-						<Route path="/task" exact component={TaskListContainer} />
+						<Route path="/task" exact component={TaskPage} />
 					</div>
 					<div>
-						<Route path="/secrets" exact component={SecretListContainer} />
+						<Route path="/secrets" exact component={SecretPage} />
 					</div>
 					<StickyFooter />
 				</HashRouter>

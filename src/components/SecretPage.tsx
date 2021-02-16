@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Container, Grid } from '@material-ui/core';
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
 import { ISecretsResponse, ISecretData } from '../states';
-import { SecretCard } from './secretsComponent/SecretCard';
+import { SecretCard } from './secretsModules';
 
 const useStyles = makeStyles( (theme) => ({
 	root: {
@@ -37,7 +37,7 @@ const createSecretCard = (data: ISecretData[]): JSX.Element[] => {
 }
 
 
-export const SecretListContainer: React.FC = () => {
+export const SecretPage: React.FC = () => {
 	const classes = useStyles();
 
 	const [secretsName, setSecretsName] = useState<string>('');
