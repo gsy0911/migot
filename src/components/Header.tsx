@@ -7,9 +7,10 @@ import { Link }  from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import LockIcon from '@material-ui/icons/Lock';
+import AttachFileIcon from '@material-ui/icons/AttachFile';
+import RoomIcon from '@material-ui/icons/Room';
 
 const drawerWidth = 200;
 const useStyles = makeStyles( (theme) => ({
@@ -29,55 +30,81 @@ const useStyles = makeStyles( (theme) => ({
 		  easing: theme.transitions.easing.sharp,
 		  duration: theme.transitions.duration.leavingScreen,
 		}),
-	  },
-	  appBarShift: {
+	},
+	appBarShift: {
 		marginLeft: drawerWidth,
 		width: `calc(100% - ${drawerWidth}px)`,
 		transition: theme.transitions.create(['width', 'margin'], {
 		  easing: theme.transitions.easing.sharp,
 		  duration: theme.transitions.duration.enteringScreen,
 		}),
-	  },
-	  hide: {
+	},
+	hide: {
 		display: 'none',
-	  },
-	  drawer: {
+	},
+	drawer: {
 		width: drawerWidth,
 		flexShrink: 0,
 		whiteSpace: 'nowrap',
-	  },
-	  drawerOpen: {
+	},
+	drawerOpen: {
 		width: drawerWidth,
 		transition: theme.transitions.create('width', {
 		  easing: theme.transitions.easing.sharp,
 		  duration: theme.transitions.duration.enteringScreen,
 		}),
-	  },
-	  drawerClose: {
+	},
+	drawerClose: {
 		transition: theme.transitions.create('width', {
-		  easing: theme.transitions.easing.sharp,
-		  duration: theme.transitions.duration.leavingScreen,
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.leavingScreen,
 		}),
 		overflowX: 'hidden',
 		width: theme.spacing(7) + 1,
 		[theme.breakpoints.up('sm')]: {
-		  width: theme.spacing(9) + 1,
+			width: theme.spacing(9) + 1,
 		},
-	  },
-	  toolbar: {
+	},
+	toolbar: {
 		display: 'flex',
 		alignItems: 'center',
 		justifyContent: 'flex-end',
 		padding: theme.spacing(0, 1),
 		// necessary for content to be below app bar
 		...theme.mixins.toolbar,
-	  },
-	  content: {
+	},
+	content: {
 		flexGrow: 1,
 		padding: theme.spacing(3),
-	  },
+	},
+	listItem: {
+		display: 'flex'
+	}
 }));
 
+/**
+ * @param props
+ * @see https://material-ui.com/ja/guides/composition/#react-router
+ */
+const ListItemLink: React.FC<{icon: React.ReactElement, primary: string, to: string}> = (props) => {
+	const { icon, primary, to } = props;
+
+	const CustomLink = React.useMemo(() =>
+		React.forwardRef((linkProps, ref) => (
+		  	<Link to={to} {...linkProps} />
+		)),
+	 	[to],
+	);
+
+	return (
+	  <li>
+		<ListItem button component={CustomLink}>
+		  <ListItemIcon>{icon}</ListItemIcon>
+		  <ListItemText primary={primary} />
+		</ListItem>
+	  </li>
+	);
+}
 
 export const HeaderAppBar: React.FC = () => {
 	const classes = useStyles();
@@ -91,7 +118,6 @@ export const HeaderAppBar: React.FC = () => {
 	const handleDrawerClose = () => {
 	  setOpen(false);
 	};
-
 
 	// officially recommened place second `<Toolbar />`, to avoid hide other components by fixed-AppBar
 	return (
@@ -114,17 +140,14 @@ export const HeaderAppBar: React.FC = () => {
 					<Typography variant="h6" className={classes.title}>
 						migot
 					</Typography>
-
-					<Link to={"/task"} style={{ color: '#FFF', padding: 8}}>TASK</Link>
-					<Link to={"/secrets"} style={{ color: '#FFF', padding: 8}}>SECRETS</Link>
 				</Toolbar>
 			</AppBar>
-			{/* <Toolbar /> */}
+			<Toolbar />
 			<Drawer
 				variant="permanent"
 				className={clsx(classes.drawer, {
-				[classes.drawerOpen]: open,
-				[classes.drawerClose]: !open,
+					[classes.drawerOpen]: open,
+					[classes.drawerClose]: !open,
 				})}
 				classes={{
 				paper: clsx({
@@ -140,21 +163,13 @@ export const HeaderAppBar: React.FC = () => {
 				</div>
 				<Divider />
 				<List>
-				{['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-					<ListItem button key={text}>
-					<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-					<ListItemText primary={text} />
-					</ListItem>
-				))}
+					<ListItemLink icon={<ListAltIcon />} primary={'TASK'} to={'/task'}/>
+					<ListItemLink icon={<LockIcon />} primary={'SECRETS'} to={'/secrets'}/>
 				</List>
 				<Divider />
 				<List>
-				{['All mail', 'Trash', 'Spam'].map((text, index) => (
-					<ListItem button key={text}>
-					<ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-					<ListItemText primary={text} />
-					</ListItem>
-				))}
+					<ListItemLink icon={<AttachFileIcon />} primary={'SNIPPETS'} to={'/snippets'}/>
+					<ListItemLink icon={<RoomIcon />} primary={'VISITED'} to={'/visited'}/>
 				</List>
 			</Drawer>
 		</div>
