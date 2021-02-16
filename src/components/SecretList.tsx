@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { TextField, Button, Container, Grid } from '@material-ui/core';
 import { SecretsManagerClient, GetSecretValueCommand } from "@aws-sdk/client-secrets-manager";
 import { ISecretsResponse, ISecretData } from '../states';
-import { SecretCard } from './secretsComponent/SecretCard';
+import { SecretCard } from './secretsModules/SecretCard';
 
 const useStyles = makeStyles( (theme) => ({
 	root: {

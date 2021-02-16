@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback,  useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { addTask } from '../actions';
+import { addTask } from '../../actions';
 import { nanoid } from "nanoid";
 
 import { IconButton, TextField } from '@material-ui/core';
