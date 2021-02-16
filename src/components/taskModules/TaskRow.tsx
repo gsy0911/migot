@@ -18,7 +18,7 @@ const useStyles = makeStyles( (theme) => ({
 	}
 }))
 
-export const MaterialTaskRow: React.FC<{ data: ITask }> = (props) => {
+export const TaskRow: React.FC<{ data: ITask }> = (props) => {
 	const classes = useStyles()
 
 	const { data } = props;

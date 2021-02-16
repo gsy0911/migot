@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 	},
   	}));
 
-export const MaterialAddTask: React.FC = () => {
+export const TaskHeader: React.FC = () => {
 	const classes = useStyles()
 
 	const dispatch = useDispatch();

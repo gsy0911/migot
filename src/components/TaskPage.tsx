@@ -1,9 +1,7 @@
 import React, { useMemo, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { IState } from '../states/IState';
-import { ITask, ITaskList } from '../states/ITask';
-import { MaterialAddTask } from './taskModules/TaskHeader';
-import { MaterialTaskRow } from './taskModules/TaskRow';
+import { IState, ITask, ITaskList } from '../states';
+import { TaskHeader, TaskRow } from './taskModules';
 import { getTaskList } from '../actions';
 import { Loading } from './Loading';
 import { Container } from '@material-ui/core';
@@ -33,7 +31,7 @@ const createTaskList = (tasks: ITask[]): JSX.Element[] => {
 	)
 	.map(it => {
 		console.log(it)
-		return <MaterialTaskRow key={it.id} data={it} />
+		return <TaskRow key={it.id} data={it} />
 	});
 }
 
@@ -61,7 +59,7 @@ export const TaskPage: React.FC = () => {
 		<div className={classes.root}>
 			<Loading shown={taskList.loading} />
 			<Container fixed className={classes.container}>
-				<MaterialAddTask />
+				<TaskHeader />
 				{taskListElement}
 			</Container>
 
