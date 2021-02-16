@@ -1,18 +1,16 @@
 # Migot
 
-# commands
+# installation
 
 ```shell
-# runs once
-$ npm run dev
-
-# runs when file saved
-$ npm run dev:watch
-
-# build from TypeScript to JavaScript
-$ npm run build
-
-# run
-$ npm run start
+# create installer for macOS
+$ npm run package:mac
 ```
 
+# tag
+
+- v0.1.1
+	- use `material ui`
+	- able to connect `aws` via `~/.aws/credentials`
+- v0.1.0
+	- add task record feature

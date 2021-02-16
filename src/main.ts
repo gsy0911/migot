@@ -1,4 +1,4 @@
-import { app, BrowserWindow, globalShortcut } from "electron";
+import { app, BrowserWindow, globalShortcut, Notification } from "electron";
 import { TrayMenu } from "./TrayMenu";
 import path from "path";
 
@@ -16,6 +16,8 @@ const createWindow = () => {
 			preload: path.join(__dirname, "./core/preLoad.js"),
 			webSecurity: false,
 		},
+		frame: false,
+		alwaysOnTop: true,
 	});
 
 	void win.loadFile(path.join(__dirname, "./index.html"));
@@ -46,7 +48,18 @@ app.on("ready", function () {
 		window ? hideWindow(window) : showWindow();
 	});
 
+	const notification = new Notification({
+		title: "migot",
+		body: "Hello !",
+	});
+	notification.show();
+
 	tray = new TrayMenu();
+});
+
+app.on("will-quit", () => {
+	// remove all registered shortcut
+	globalShortcut.unregisterAll();
 });
 
 function showWindow() {
