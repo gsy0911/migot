@@ -8,6 +8,7 @@ export interface ISecretData {
 	primaryId: string;
 	secondaryId?: string;
 	passphrase: string;
+	url?: string;
 	tags?: ISecretDataTag[];
 }
 

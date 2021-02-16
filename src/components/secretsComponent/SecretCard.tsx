@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import { Card, CardActions, CardContent, Chip, Grid, IconButton, Popover, Typography } from '@material-ui/core';
+import { Card, CardActionArea, CardContent, Grid, Typography, Modal, Fade, Backdrop } from '@material-ui/core';
 import { ISecretData } from '../../states';
 
 
@@ -32,23 +31,60 @@ const useStyles = makeStyles( (theme) => ({
 		  duration: theme.transitions.duration.shortest,
 		}),
 	},
-	  expandOpen: {
+	expandOpen: {
 		transform: 'rotate(180deg)',
+	},
+	modal: {
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	paper: {
+		backgroundColor: theme.palette.background.paper,
+		border: '2px solid #000',
+		boxShadow: theme.shadows[5],
+		padding: theme.spacing(2, 4, 3),
 	},
 }));
 
 
 export const SecretCard: React.FC<ISecretData> = (props) => {
 	const classes = useStyles();
+	const [modalOpen, setModalOpen] = useState(false);
 
+	const handleOpen = () => {
+		setModalOpen(true);
+	};
+
+	const handleClose = () => {
+		setModalOpen(false);
+	};
 	return (
 		<Grid item xs={12} sm={6} md={4}>
 			<Card className={classes.card}>
-				<CardContent className={classes.cardContent}>
-					<Typography gutterBottom variant="h5" component="h2">
-						{props.name}
-					</Typography>
-				</CardContent>
+				<CardActionArea onClick={handleOpen}>
+					<CardContent className={classes.cardContent}>
+						<Typography gutterBottom variant="h5" component="h2">
+							{props.name}
+						</Typography>
+					</CardContent>
+				</CardActionArea>
+				<Modal
+					aria-labelledby="transition-modal-title"
+					aria-describedby="transition-modal-description"
+					className={classes.modal}
+					open={modalOpen}
+					onClose={handleClose}
+					closeAfterTransition
+					BackdropComponent={Backdrop}
+					BackdropProps={{timeout: 500}}>
+					<Fade in={modalOpen}>
+						<div className={classes.paper}>
+							<h2 id="transition-modal-title">{props.name}</h2>
+							<p id="transition-modal-description">{props.primaryId}</p>
+						</div>
+					</Fade>
+				</Modal>
 			</Card>
 		</Grid>
 	)
