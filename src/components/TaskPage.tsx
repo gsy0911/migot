@@ -37,7 +37,7 @@ const createTaskList = (tasks: ITask[]): JSX.Element[] => {
 	});
 }
 
-export const TaskListContainer: React.FC = () => {
+export const TaskPage: React.FC = () => {
 	const classes = useStyles();
 	const dispatch = useDispatch();
 

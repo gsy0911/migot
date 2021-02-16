@@ -37,7 +37,7 @@ const createSecretCard = (data: ISecretData[]): JSX.Element[] => {
 }
 
 
-export const SecretListContainer: React.FC = () => {
+export const SecretPage: React.FC = () => {
 	const classes = useStyles();
 
 	const [secretsName, setSecretsName] = useState<string>('');
