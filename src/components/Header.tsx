@@ -11,6 +11,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import LockIcon from '@material-ui/icons/Lock';
 import AttachFileIcon from '@material-ui/icons/AttachFile';
 import RoomIcon from '@material-ui/icons/Room';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const drawerWidth = 200;
 const useStyles = makeStyles( (theme) => ({
@@ -97,12 +98,10 @@ const ListItemLink: React.FC<{icon: React.ReactElement, primary: string, to: str
 	);
 
 	return (
-	  <li>
 		<ListItem button component={CustomLink}>
 		  <ListItemIcon>{icon}</ListItemIcon>
 		  <ListItemText primary={primary} />
 		</ListItem>
-	  </li>
 	);
 }
 
@@ -170,6 +169,10 @@ export const HeaderAppBar: React.FC = () => {
 				<List>
 					<ListItemLink icon={<AttachFileIcon />} primary={'SNIPPETS'} to={'/snippets'}/>
 					<ListItemLink icon={<RoomIcon />} primary={'VISITED'} to={'/visited'}/>
+				</List>
+				<Divider />
+				<List>
+					<ListItemLink icon={<SettingsIcon />} primary={'SETTING'} to={'/setting'}/>
 				</List>
 			</Drawer>
 		</div>
